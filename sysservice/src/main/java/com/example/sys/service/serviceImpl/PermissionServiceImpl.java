@@ -1,10 +1,10 @@
-package com.example.demo.service.serviceImpl;
+package com.example.sys.service.serviceImpl;
 
-import com.example.demo.common.JsonResult;
-import com.example.demo.common.RequestFilter;
-import com.example.demo.dao.PermissionDao;
-import com.example.demo.entity.SysPermission;
-import com.example.demo.service.PermissionService;
+import com.example.sys.common.JsonResult;
+import com.example.sys.common.RequestFilter;
+import com.example.sys.dao.PermissionDao;
+import com.example.sys.entity.SysPermission;
+import com.example.sys.service.PermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

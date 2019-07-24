@@ -1,8 +1,8 @@
-package com.example.demo.service;
+package com.example.sys.service;
 
-import com.example.demo.common.JsonResult;
-import com.example.demo.common.RequestFilter;
-import com.example.demo.entity.SysUser;
+import com.example.sys.common.JsonResult;
+import com.example.sys.common.RequestFilter;
+import com.example.sys.entity.SysUser;
 
 public interface UserService {
     /**查询所有的用户
@@ -37,4 +37,5 @@ public interface UserService {
     JsonResult findUserPage(RequestFilter requestFilter);
 
 
+    SysUser findUserByName(String username);
 }

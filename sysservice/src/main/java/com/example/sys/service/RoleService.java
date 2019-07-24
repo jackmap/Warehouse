@@ -1,10 +1,8 @@
-package com.example.demo.service;
+package com.example.sys.service;
 
-import com.example.demo.common.JsonResult;
-import com.example.demo.common.RequestFilter;
-import com.example.demo.entity.SysRole;
-
-import java.awt.print.Pageable;
+import com.example.sys.common.JsonResult;
+import com.example.sys.common.RequestFilter;
+import com.example.sys.entity.SysRole;
 
 public interface RoleService {
     /**查询所有的用户

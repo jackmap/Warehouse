@@ -1,4 +1,4 @@
-package com.example.demo.common;
+package com.example.sys.common;
 
 import java.util.List;
 

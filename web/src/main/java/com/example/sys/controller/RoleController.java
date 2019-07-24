@@ -1,9 +1,9 @@
 package com.example.sys.controller;
 
-import com.example.demo.common.JsonResult;
-import com.example.demo.common.RequestFilter;
-import com.example.demo.entity.SysRole;
-import com.example.demo.service.RoleService;
+import com.example.sys.common.JsonResult;
+import com.example.sys.common.RequestFilter;
+import com.example.sys.entity.SysRole;
+import com.example.sys.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

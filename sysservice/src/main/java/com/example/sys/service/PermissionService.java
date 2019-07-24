@@ -1,9 +1,8 @@
-package com.example.demo.service;
+package com.example.sys.service;
 
-import com.example.demo.common.JsonResult;
-import com.example.demo.common.RequestFilter;
-import com.example.demo.entity.SysPermission;
-import com.example.demo.entity.SysUser;
+import com.example.sys.common.JsonResult;
+import com.example.sys.common.RequestFilter;
+import com.example.sys.entity.SysPermission;
 
 public interface PermissionService {
     /**查询所有的权限信息

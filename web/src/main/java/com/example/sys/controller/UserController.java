@@ -1,9 +1,14 @@
 package com.example.sys.controller;
 
-import com.example.demo.common.JsonResult;
-import com.example.demo.common.RequestFilter;
-import com.example.demo.entity.SysUser;
-import com.example.demo.service.UserService;
+import com.example.sys.common.JsonResult;
+import com.example.sys.common.RequestFilter;
+import com.example.sys.entity.SysUser;
+import com.example.sys.service.UserService;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.LockedAccountException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +19,8 @@ public class UserController {
 
     @Autowired
     UserService userService;
+
+
 
     @RequestMapping("/findAll")
     public JsonResult findAll(){

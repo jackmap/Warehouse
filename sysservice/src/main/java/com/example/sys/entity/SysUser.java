@@ -1,4 +1,4 @@
-package com.example.demo.entity;
+package com.example.sys.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.data.annotation.LastModifiedDate;
