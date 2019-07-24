@@ -27,10 +27,24 @@ public class SysController {
     }
 
 
+    @RequestMapping("/welcome")
+    public  String Welcome(){
+        return "welcome";
+    }
 
     @RequestMapping("/sys/user")
     public  String User(){
        return "/sys/user/user";
+    }
+
+    @RequestMapping("/sys/user/add")
+    public  String AddUser(){
+        return "/sys/user/add";
+    }
+
+    @RequestMapping("/sys/user/edit")
+    public  String EditUser(){
+        return "/sys/user/edit";
     }
 
     @RequestMapping("/sys/rule")
@@ -42,10 +56,12 @@ public class SysController {
     public  String Role(){
         return "/sys/role/role";
     }
+
     @RequestMapping("/sys/role/add")
     public  String AddRole(){
         return "/sys/role/add";
     }
+
     @RequestMapping("/sys/role/edit")
     public  String EditRole(){
         return "/sys/role/edit";

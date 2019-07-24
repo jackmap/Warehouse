@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.data.annotation.LastModifiedDate;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -10,13 +12,15 @@ import java.util.Date;
 public class SysUser implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
+	@Id@GeneratedValue
 	private Integer uid;
 	@Column(unique = true)
 	private String username;// 帐号
-	private String name;// 名称（昵称或者真实姓名，不同系统不同定义）
+	private String nickname;// 名称（昵称或者真实姓名，不同系统不同定义）
 	private String password; // 密码;
 	private String salt;// 加密密码的盐
+	@Column(columnDefinition = "enum('男','女')")
+	private  String sex;
 	private String email; // 邮箱;
 	private String qq; // qq;
 	private String phone; // 手机;
@@ -24,7 +28,10 @@ public class SysUser implements Serializable {
 	private String address; // 地址;
 	private String country; // 国家;
 	private byte state;// 用户状态,0:创建未认证（比如没有激活，没有输入验证码等等）--等待验证的用户 , 1:正常状态,2：用户被锁定.
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date createTime;
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@LastModifiedDate
 	private Date updateTime;
 	private String updateName;
 
@@ -45,12 +52,12 @@ public class SysUser implements Serializable {
 		this.username = username;
 	}
 
-	public String getName() {
-		return name;
+	public String getNickname() {
+		return nickname;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 	public String getPassword() {

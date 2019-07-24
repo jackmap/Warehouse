@@ -1,9 +1,10 @@
 package com.example.demo.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -12,8 +13,8 @@ import java.util.Date;
 @NamedQuery(name = "SysRole.findAll", query = "SELECT s FROM SysRole s")
 public class SysRole implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Id
-    private Integer id; // 编号
+    @Id@GeneratedValue
+    private Integer rid; // 编号
 
     private String roleName; // 角色标识程序中判断使用,如"admin",这个是唯一的:
 
@@ -21,17 +22,23 @@ public class SysRole implements Serializable {
 
     private Boolean available = Boolean.FALSE; // 是否可用,如果不可用将不会添加给用户
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @CreatedDate
     private Date createTime;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @LastModifiedDate
     private Date updateTime;
+
     private String updateName;
 
 
-    public Integer getId() {
-        return id;
+    public Integer getRid() {
+        return rid;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setRid(Integer rid) {
+        this.rid = rid;
     }
 
     public String getRoleName() {

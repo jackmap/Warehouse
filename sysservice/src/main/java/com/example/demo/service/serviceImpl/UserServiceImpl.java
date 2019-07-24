@@ -1,6 +1,7 @@
 package com.example.demo.service.serviceImpl;
 
 import com.example.demo.common.JsonResult;
+import com.example.demo.common.RequestFilter;
 import com.example.demo.dao.UserDao;
 import com.example.demo.entity.SysUser;
 import com.example.demo.service.UserService;
@@ -30,8 +31,30 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public JsonResult findUserPage(int page, int size) {
-        Pageable pageable = (Pageable) new PageRequest(page,size, Sort.Direction.ASC,"id");
+    public JsonResult addUser(SysUser user) {
+        return null;
+    }
+
+    @Override
+    public JsonResult editUser(SysUser user) {
+        return null;
+    }
+
+    @Override
+    public JsonResult findUserPage(RequestFilter requestFilter) {
+        Pageable pageable = (Pageable) new PageRequest(requestFilter.getPage()-1,requestFilter.getLimit(), Sort.Direction.ASC,"uid");
+        Page<SysUser>  pages=userDao.findAll(pageable);
+        if (pages.getContent()!=null){
+            int count= (int) pages.getTotalElements();
+            return new JsonResult(0,count,pages.getContent(),"查询成功");
+        }else {
+            return new JsonResult(1,"查询失败");
+        }
+    }
+
+    @Override
+    public JsonResult findUserPage(int page, int limit) {
+        Pageable pageable = (Pageable) new PageRequest(page-1,limit, Sort.Direction.ASC,"uid");
         Page<SysUser>  pages=userDao.findAll(pageable);
         if (pages.getContent()!=null){
             int count= (int) pages.getTotalElements();

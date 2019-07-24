@@ -1,5 +1,9 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -10,16 +14,22 @@ import java.util.Date;
 public class SysPermission implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
+	@Id@GeneratedValue
 	private Integer pid;// 主键.
-	private String name;// 名称.
+	private String menuname;// 名称.
 	@Column(columnDefinition = "enum('menu','button')")
 	private String resourceType;// 资源类型，[menu|button]
 	private String url;// 资源路径.
 	private String permission; // 权限字符串,menu例子：role:*，button例子：role:create,role:update,role:delete,role:view
 	private String parentId; // 父编号
 	private Boolean available = Boolean.FALSE;
+
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@CreatedDate
 	private Date createTime;
+
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@LastModifiedDate
 	private Date updateTime;
 	private String updateName;
 
@@ -32,12 +42,12 @@ public class SysPermission implements Serializable {
 		this.pid = pid;
 	}
 
-	public String getName() {
-		return name;
+	public String getMenuname() {
+		return menuname;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setMenuname(String menuname) {
+		this.menuname = menuname;
 	}
 
 	public String getResourceType() {

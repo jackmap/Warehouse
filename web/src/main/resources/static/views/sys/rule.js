@@ -20,11 +20,13 @@
 
          table.render({
             elem: '#ruleTable'
-            ,url:'/sys/role/findPage'
+            ,url:'/sys/rule/findPage'
             ,page: true
             ,cols: [[
-               {field:'id', title: 'ID', sort: true}
-              ,{field:'menuName', title: '权限名称'}
+               {field:'pid', title: 'ID', sort: true}
+              ,{field:'menuname', title: '权限名称'}
+              ,{field:'url', title: '权限'}
+              ,{field:'resourceType', title: '权限类型'}
             ]]
           });
 

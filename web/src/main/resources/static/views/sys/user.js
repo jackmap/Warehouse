@@ -20,10 +20,10 @@
 
          table.render({
             elem: '#userTable'
-            ,url:'/sys/role/findPage'
+            ,url:'/sys/user/findPage'
             ,page: true
             ,cols: [[
-               {field:'id', title: 'ID', sort: true}
+               {field:'uid', title: 'ID', sort: true}
               ,{field:'username', title: '用户名'}
               ,{field:'nickname', title: '呢称'}
               ,{field:'createTime', title: '创建时间'}

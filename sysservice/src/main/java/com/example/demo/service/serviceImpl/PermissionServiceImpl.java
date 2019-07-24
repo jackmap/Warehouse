@@ -1,6 +1,7 @@
 package com.example.demo.service.serviceImpl;
 
 import com.example.demo.common.JsonResult;
+import com.example.demo.common.RequestFilter;
 import com.example.demo.dao.PermissionDao;
 import com.example.demo.entity.SysPermission;
 import com.example.demo.service.PermissionService;
@@ -15,8 +16,10 @@ import java.util.List;
 
 @Service
 public class PermissionServiceImpl implements PermissionService {
+
     @Autowired
     PermissionDao  permissionDao;
+
     @Override
     public JsonResult findAll() {
        List<SysPermission> list= permissionDao.findAll();
@@ -25,12 +28,21 @@ public class PermissionServiceImpl implements PermissionService {
        }else {
             return JsonResult.Error();
        }
-
     }
 
     @Override
-    public JsonResult findRulePage(int page, int size) {
-        Pageable pageable = (Pageable) new PageRequest(page,size, Sort.Direction.ASC,"id");
+    public JsonResult addPermission(SysPermission permission) {
+        return null;
+    }
+
+    @Override
+    public JsonResult editPermission(SysPermission permission) {
+        return null;
+    }
+
+    @Override
+    public JsonResult findRulePage(int page, int limit) {
+        Pageable pageable = (Pageable) new PageRequest(page-1,limit, Sort.Direction.ASC,"pid");
         Page<SysPermission> pages=permissionDao.findAll(pageable);
         if (pages.getContent()!=null){
             int count= (int) pages.getTotalElements();
@@ -39,4 +51,17 @@ public class PermissionServiceImpl implements PermissionService {
             return new JsonResult(1,"查询失败");
         }
     }
+
+    @Override
+    public JsonResult findRulePageFilter(RequestFilter requestFilter) {
+        Pageable pageable = (Pageable) new PageRequest(requestFilter.getPage()-1,requestFilter.getLimit(), Sort.Direction.ASC,"pid");
+        Page<SysPermission> pages=permissionDao.findAll(pageable);
+        if (pages.getContent()!=null){
+            int count= (int) pages.getTotalElements();
+            return new JsonResult(0,count,pages.getContent(),"查询成功");
+        }else {
+            return new JsonResult(1,"查询失败");
+        }
+    }
+
 }

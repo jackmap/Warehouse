@@ -23,7 +23,7 @@
             ,url:'/sys/role/findPage'
             ,page: true
             ,cols: [[
-               {field:'id', title: 'ID', sort: true}
+               {field:'rid', title: 'ID', sort: true}
               ,{field:'roleName', title: '角色名'}
               ,{field:'description', title: '描述'}
               ,{field:'available', title: '状态'}
