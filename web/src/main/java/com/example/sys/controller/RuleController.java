@@ -29,14 +29,12 @@ public class RuleController {
         return permissionService.findRulePageFilter(requestFilter);
     }
 
-
-
-    @PostMapping("/addPermission")
+    @PostMapping("/add")
     public JsonResult addPermission(SysPermission  permission){
         return permissionService.addPermission(permission);
     }
 
-    @PostMapping("/editPermission")
+    @PostMapping("/edit")
     public JsonResult editPermission(SysPermission permission){
         return permissionService.editPermission(permission);
     }

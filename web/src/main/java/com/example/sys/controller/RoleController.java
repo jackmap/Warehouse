@@ -28,12 +28,12 @@ public class RoleController {
     public JsonResult findPageFilter(@RequestBody RequestFilter requestFilter){
         return roleService.findPageFilter(requestFilter);
     }
-    @PostMapping("/addRole")
+    @PostMapping("/add")
     public JsonResult addRole(SysRole role){
         return roleService.addRole(role);
     }
 
-    @PostMapping("/editRole")
+    @PostMapping("/edit")
     public JsonResult editRole(SysRole role){
         return roleService.editRole(role);
     }

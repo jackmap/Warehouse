@@ -16,10 +16,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/sys/user")
 public class UserController {
 
-
     @Autowired
     UserService userService;
-
 
 
     @RequestMapping("/findAll")
@@ -37,12 +35,12 @@ public class UserController {
         return userService.findUserPage(page,limit);
     }
 
-    @PostMapping("/addUser")
+    @PostMapping("/add")
     public JsonResult addUser(SysUser user){
         return userService.addUser(user);
     }
 
-    @PostMapping("/editUser")
+    @PostMapping("/edit")
     public JsonResult editUser(SysUser user){
         return userService.editUser(user);
     }

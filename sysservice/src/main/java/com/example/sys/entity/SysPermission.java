@@ -19,11 +19,11 @@ public class SysPermission implements Serializable {
 	private String menuname;// 名称.
 	@Column(columnDefinition = "enum('menu','button')")
 	private String resourceType;// 资源类型，[menu|button]
-	private String url;// 资源路径.
-	private String permission; // 权限字符串,menu例子：role:*，button例子：role:create,role:update,role:delete,role:view
+	private String url; // 权限字符串,menu例子：role:*，button例子：role:create,role:update,role:delete,role:view
 	private String parentId; // 父编号
+	private String icon; //图片
 	private Boolean available = Boolean.FALSE;
-
+	private String note;
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@CreatedDate
 	private Date createTime;
@@ -66,14 +66,6 @@ public class SysPermission implements Serializable {
 		this.url = url;
 	}
 
-	public String getPermission() {
-		return permission;
-	}
-
-	public void setPermission(String permission) {
-		this.permission = permission;
-	}
-
 	public String getParentId() {
 		return parentId;
 	}
@@ -113,4 +105,13 @@ public class SysPermission implements Serializable {
 	public void setUpdateName(String updateName) {
 		this.updateName = updateName;
 	}
+
+	public String getIcon() {return icon;}
+
+	public void setIcon(String icon) {this.icon = icon; }
+
+	public String getNote() {return note; }
+
+	public void setNote(String note) {this.note = note; }
+
 }

@@ -12,9 +12,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+/**
+ * 系统页面控制器
+ * @author mp
+ */
 @Controller
 public class SysController {
-
+    /**登陆页面
+     * @return
+     */
     @GetMapping("/login")
     public  String Login(){
         return "login";
@@ -46,6 +52,9 @@ public class SysController {
         }
     }
 
+    /**登出页面
+     * @return
+     */
     @GetMapping("/logout")
     public  String Logout(){
         Subject currentUser = SecurityUtils.getSubject();
@@ -58,23 +67,31 @@ public class SysController {
         return "index";
     }
 
-
     @RequestMapping("/index")
     public  String Index1(){
         return "index";
     }
 
+    /**日记记录页面
+     * @return
+     */
     @RequestMapping("/log")
     public  String Log(){
         return "log";
     }
 
 
+    /**欢迎页面
+     * @return
+     */
     @RequestMapping("/welcome")
     public  String Welcome(){
         return "welcome";
     }
 
+    /**管理员页面
+     * @return
+     */
     @RequestMapping("/sys/user")
     public  String User(){
        return "/sys/user/user";
@@ -90,11 +107,28 @@ public class SysController {
         return "/sys/user/edit";
     }
 
+
+    /** 权限页面
+     * @return
+     */
     @RequestMapping("/sys/rule")
     public  String Rule(){
         return "/sys/rule/rule";
     }
 
+    @RequestMapping("/sys/rule/add")
+    public  String AddRule(){
+        return "/sys/rule/add";
+    }
+
+    @RequestMapping("/sys/rule/edit")
+    public  String EditRule(){
+        return "/sys/rule/edit";
+    }
+
+    /**角色页面
+     * @return
+     */
     @RequestMapping("/sys/role")
     public  String Role(){
         return "/sys/role/role";
@@ -111,6 +145,9 @@ public class SysController {
     }
 
 
+    /**角色权限页面
+     * @return
+     */
     @RequestMapping("/sys/cate")
     public  String Cate(){
         return "/sys/rule/cate";
