@@ -11,6 +11,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -31,12 +33,29 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public JsonResult addRole(SysRole role) {
-        return null;
+        SysRole sysrole=roleDao.findByRoleName(role.getRoleName());
+        if(sysrole==null){
+            role.setCreateTime(new Date());
+            roleDao.save(role);
+            return  new JsonResult(0,"角色保存成功！");
+        }else{
+            return  new JsonResult(1,"角色名称已存在，请更换角色名称！");
+        }
     }
 
     @Override
     public JsonResult editRole(SysRole role) {
-        return null;
+        SysRole sysrole=roleDao.findById(role.getRid()).get();
+        if(sysrole!=null){
+            sysrole.setRoleName(role.getRoleName());
+            sysrole.setAvailable(role.getAvailable());
+            sysrole.setDescription(role.getDescription());
+            sysrole.setUpdateTime(new Date());
+            roleDao.save(sysrole);
+            return  new JsonResult(0,"修改角色成功！");
+        }else{
+            return  new JsonResult(0,"角色不存在，请查询你的角色信息是否存在！");
+        }
     }
 
     @Override

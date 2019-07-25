@@ -19,7 +19,7 @@
         });
 
          table.render({
-            elem: '#test'
+            elem: '#roleTable'
             ,url:'/sys/role/findPage'
             ,page: true
             ,cols: [[
@@ -27,6 +27,7 @@
               ,{field:'roleName', title: '角色名'}
               ,{field:'description', title: '描述'}
               ,{field:'available', title: '状态'}
+              ,{fixed: 'right',align:'center',toolbar: '#barDemo'}
             ]]
           });
 

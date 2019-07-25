@@ -32,6 +32,7 @@ public class SysRole implements Serializable {
 
     private String updateName;
 
+    private String note;
 
     public Integer getRid() {
         return rid;
@@ -87,5 +88,13 @@ public class SysRole implements Serializable {
 
     public void setUpdateName(String updateName) {
         this.updateName = updateName;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 }

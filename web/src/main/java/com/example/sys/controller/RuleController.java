@@ -30,12 +30,12 @@ public class RuleController {
     }
 
     @PostMapping("/add")
-    public JsonResult addPermission(SysPermission  permission){
+    public JsonResult addPermission(@RequestBody SysPermission  permission){
         return permissionService.addPermission(permission);
     }
 
     @PostMapping("/edit")
-    public JsonResult editPermission(SysPermission permission){
+    public JsonResult editPermission(@RequestBody SysPermission permission){
         return permissionService.editPermission(permission);
     }
 

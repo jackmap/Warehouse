@@ -21,6 +21,7 @@ public class SysPermission implements Serializable {
 	private String resourceType;// 资源类型，[menu|button]
 	private String url; // 权限字符串,menu例子：role:*，button例子：role:create,role:update,role:delete,role:view
 	private String parentId; // 父编号
+	private String parentName;
 	private String icon; //图片
 	private Boolean available = Boolean.FALSE;
 	private String note;
@@ -114,4 +115,11 @@ public class SysPermission implements Serializable {
 
 	public void setNote(String note) {this.note = note; }
 
+	public String getParentName() {
+		return parentName;
+	}
+
+	public void setParentName(String parentName) {
+		this.parentName = parentName;
+	}
 }

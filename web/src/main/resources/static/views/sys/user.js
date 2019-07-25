@@ -28,6 +28,7 @@
               ,{field:'nickname', title: '呢称'}
               ,{field:'createTime', title: '创建时间'}
               ,{field:'state', title: '状态'}
+              ,{fixed: 'right',align:'center',toolbar: '#barDemo'}
             ]]
           });
 

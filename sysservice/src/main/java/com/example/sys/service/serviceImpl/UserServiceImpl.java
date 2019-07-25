@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -32,12 +33,26 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public JsonResult addUser(SysUser user) {
-        return null;
+        SysUser sysUser=userDao.findByUsernameAndCompany(user.getUsername(),user.getCompany());
+        if(sysUser==null){
+            userDao.save(user);
+            return  new JsonResult(0,"用戶信息保存成功！");
+        }else{
+            return  new JsonResult(1,"用戶名称已存在，请更换用戶名称！");
+        }
     }
 
     @Override
     public JsonResult editUser(SysUser user) {
-        return null;
+        SysUser sysUser=userDao.findById(user.getUid()).get();
+        if(sysUser!=null){
+            sysUser.setAddress(user.getAddress());
+            sysUser.setNickname(user.getNickname());
+            sysUser.setUpdateTime(new Date());
+            return  new JsonResult(0,"修改用戶信息成功！");
+        }else{
+            return  new JsonResult(1,"用戶不存在，请查询你的用戶信息是否存在！");
+        }
     }
 
     @Override

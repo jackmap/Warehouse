@@ -110,21 +110,13 @@
                 });
 
                 //监听提交
-                form.on('submit(add)',function(data) {
+                form.on('submit(add)',
+                function(data) {
                     console.log(data);
                     //发异步，把数据提交给php
-                    	$.ajax({
-                            url: "/sys/user/add",
-                            method: 'POST',
-                            contentType: 'application/json',
-                            data: JSON.stringify(data.field),
-                            success: function(result) {
-                               console.log(result);
-                                layer.alert("增加成功", {
-                                    icon: 6
-                                },
-                            }
-                        });
+                    layer.alert("增加成功", {
+                        icon: 6
+                    },
                     function() {
                         //关闭当前frame
                         xadmin.close();

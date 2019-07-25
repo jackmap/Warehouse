@@ -27,6 +27,7 @@
               ,{field:'menuname', title: '权限名称'}
               ,{field:'url', title: '权限'}
               ,{field:'resourceType', title: '权限类型'}
+              ,{fixed: 'right',align:'center',toolbar: '#barDemo'}
             ]]
           });
 

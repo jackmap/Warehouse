@@ -27,6 +27,7 @@ public class SysUser implements Serializable {
 	private String tel; // 电话;
 	private String address; // 地址;
 	private String country; // 国家;
+	private String company; // 公司;
 	private byte state;// 用户状态,0:创建未认证（比如没有激活，没有输入验证码等等）--等待验证的用户 , 1:正常状态,2：用户被锁定.
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date createTime;
@@ -154,5 +155,21 @@ public class SysUser implements Serializable {
 
 	public void setUpdateName(String updateName) {
 		this.updateName = updateName;
+	}
+
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+
+	public String getCompany() {
+		return company;
+	}
+
+	public void setCompany(String company) {
+		this.company = company;
 	}
 }
