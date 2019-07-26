@@ -18,9 +18,7 @@
    * @return {[type]} [description]
    */
   Xadmin.prototype.end = function() {
-
     var cate_list = this.get_cate_data();
-
     for(var i in cate_list){
       if(cate_list[i]!=null){
         $('.left-nav #nav li').eq(cate_list[i]).click();
@@ -30,7 +28,6 @@
 
 	Xadmin.prototype.add_tab = function (title,url,is_refresh) {
 		var id = md5(url);//md5每个url
-
 		//重复点击
 		for (var i = 0; i <$('.x-iframe').length; i++) {
             if($('.x-iframe').eq(i).attr('tab-id')==id){
@@ -48,7 +45,6 @@
 	}
 
   Xadmin.prototype.del_tab = function (id) {
-
     if(id){
       console.log(88);
     }else{

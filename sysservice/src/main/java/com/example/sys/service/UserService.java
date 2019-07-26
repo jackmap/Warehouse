@@ -38,4 +38,8 @@ public interface UserService {
 
 
     SysUser findUserByName(String username);
+
+    JsonResult ChangUserState(Integer uid);
+
+    JsonResult deleteUser(Integer uid);
 }

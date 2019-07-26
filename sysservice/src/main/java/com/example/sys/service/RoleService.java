@@ -4,6 +4,8 @@ import com.example.sys.common.JsonResult;
 import com.example.sys.common.RequestFilter;
 import com.example.sys.entity.SysRole;
 
+import java.text.ParseException;
+
 public interface RoleService {
     /**查询所有的用户
      * @return
@@ -26,15 +28,12 @@ public interface RoleService {
      * @param limit
      * @return
      */
-    JsonResult findPage(int page, int limit);
-    /**  根据过滤条件查询所有的角色信息
-     * @param requestFilter
-     * @return
-     */
-    JsonResult findPageFilter(RequestFilter requestFilter);
+    JsonResult findPage(String start,String end,String username,int page,int limit) throws ParseException;
     /**  改变角色状态
      * @param rid
      * @return
      */
     JsonResult ChangRoleState(Integer rid);
+
+    JsonResult deleteRole(Integer rid);
 }

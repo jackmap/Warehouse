@@ -2,8 +2,11 @@ package com.example.sys.controller;
 
 import com.example.sys.common.JsonResult;
 import com.example.sys.dao.PermissionDao;
+import com.example.sys.dao.RoleDao;
+import com.example.sys.dao.UserDao;
 import com.example.sys.entity.SysPermission;
-import com.example.sys.service.PermissionService;
+import com.example.sys.entity.SysRole;
+import com.example.sys.entity.SysUser;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.LockedAccountException;
@@ -12,13 +15,7 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.security.acl.Permission;
-import java.util.Optional;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 系统页面控制器
@@ -97,6 +94,9 @@ public class SysController {
         return "welcome";
     }
 
+
+    @Autowired
+    UserDao userDao;
     /**管理员页面
      * @return
      */
@@ -110,11 +110,15 @@ public class SysController {
         return "/sys/user/add";
     }
 
-    @RequestMapping("/sys/user/edit")
-    public  String EditUser(){
+    @RequestMapping("/sys/user/edit/{uid}")
+    public  String EditUser(Model model, @PathVariable Integer uid){
+        SysUser user=userDao.findById(uid).get();
+        model.addAttribute("user",user);
         return "/sys/user/edit";
     }
 
+    @Autowired
+    PermissionDao permissionDao;
     /** 权限页面
      * @return
      */
@@ -133,6 +137,15 @@ public class SysController {
         return "/sys/rule/edit";
     }
 
+    @RequestMapping("/sys/rule/edit/{pid}")
+    public  String EditRule(Model model, @PathVariable Integer pid){
+        SysPermission permission=permissionDao.findById(pid).get();
+        model.addAttribute("rule",permission);
+        return "/sys/rule/edit";
+    }
+
+    @Autowired
+    RoleDao roleDao;
     /**角色页面
      * @return
      */
@@ -146,8 +159,10 @@ public class SysController {
         return "/sys/role/add";
     }
 
-    @RequestMapping("/sys/role/edit")
-    public  String EditRole(){
+    @RequestMapping("/sys/role/edit/{rid}")
+    public  String EditRole(Model model, @PathVariable Integer rid){
+        SysRole role=roleDao.findById(rid).get();
+        model.addAttribute("role",role);
         return "/sys/role/edit";
     }
 

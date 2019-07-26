@@ -11,14 +11,20 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class RoleServiceImpl implements RoleService {
     @Autowired
     RoleDao  roleDao;
+
+    SimpleDateFormat  sdf=new SimpleDateFormat("YYYY-HH-DD  HH:mm:ss");
 
     @Override
     public JsonResult findAllRole() {
@@ -59,24 +65,25 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public JsonResult findPage(int page, int limit) {
+    public JsonResult findPage(String start, String end, String username, int page, int limit) throws ParseException {
         Pageable pageable = (Pageable) new PageRequest(page-1,limit, Sort.Direction.ASC,"rid");
         Page<SysRole> pages = roleDao.findAll(pageable);
         if (pages.getContent()!=null){
-            int count= (int) pages.getTotalElements();
-            return new JsonResult(0,count,pages.getContent(),"查询成功");
-        }else {
-            return new JsonResult(1,"查询失败");
-        }
-    }
-
-    @Override
-    public JsonResult findPageFilter(RequestFilter requestFilter) {
-        Pageable pageable = (Pageable) new PageRequest(requestFilter.getPage()-1,requestFilter.getLimit(), Sort.Direction.ASC,"rid");
-        Page<SysRole> pages = roleDao.findAll(pageable);
-        if (pages.getContent()!=null){
-            int count= (int) pages.getTotalElements();
-            return new JsonResult(0,count,pages.getContent(),"查询成功");
+            List<SysRole>  list;
+            if(!StringUtils.isEmpty(username)){
+                list = pages.getContent().stream().filter(r->r.getRoleName().equals(username)).collect(Collectors.toList());
+            }else  if(!StringUtils.isEmpty(start)){
+                Date starttime=sdf.parse(start);
+                list = pages.getContent().stream().filter(r->r.getCreateTime().after(starttime)).collect(Collectors.toList());
+            }else  if(!StringUtils.isEmpty(end)){
+                Date endtime=sdf.parse(end);
+                list = pages.getContent().stream().filter(r->r.getCreateTime().before(endtime)).collect(Collectors.toList());
+            }else{
+                int count= (int) pages.getTotalElements();
+                return new JsonResult(0,count,pages.getContent(),"查询成功");
+            }
+            int count= (int) list.size();
+            return new JsonResult(0,count,list,"查询成功");
         }else {
             return new JsonResult(1,"查询失败");
         }
@@ -84,6 +91,21 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public JsonResult ChangRoleState(Integer rid) {
-        return null;
+       SysRole role = roleDao.findById(rid).get();
+       if(role.getAvailable()==true){
+           role.setAvailable(false);
+       }else {
+           role.setAvailable(true);
+       }
+       roleDao.save(role);
+       return new JsonResult(0,"修改角色"+role.getRoleName()+"状态成功！");
+    }
+
+    @Override
+    public JsonResult deleteRole(Integer rid) {
+        SysRole role = roleDao.findById(rid).get();
+        //省略
+        roleDao.delete(role);
+        return new JsonResult(0,"删除 角色"+role.getRoleName()+" 成功！");
     }
 }

@@ -1,13 +1,11 @@
 package com.example.sys.common;
 
-import java.util.Date;
-
 public class RequestFilter {
     private Integer page;
     private Integer limit;
-    private Date starttime;
-    private Date endtime;
-    private String  name;
+    private String starttime;
+    private String endtime;
+    private String  username;
 
     public Integer getPage() {
         return page;
@@ -25,27 +23,27 @@ public class RequestFilter {
         this.limit = limit;
     }
 
-    public Date getStarttime() {
+    public String getStarttime() {
         return starttime;
     }
 
-    public void setStarttime(Date starttime) {
+    public void setStarttime(String starttime) {
         this.starttime = starttime;
     }
 
-    public Date getEndtime() {
+    public String getEndtime() {
         return endtime;
     }
 
-    public void setEndtime(Date endtime) {
+    public void setEndtime(String endtime) {
         this.endtime = endtime;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

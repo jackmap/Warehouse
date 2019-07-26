@@ -3,6 +3,7 @@ package com.example.sys.service.serviceImpl;
 import com.example.sys.common.JsonResult;
 import com.example.sys.common.RequestFilter;
 import com.example.sys.dao.UserDao;
+import com.example.sys.entity.SysRole;
 import com.example.sys.entity.SysUser;
 import com.example.sys.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,5 +83,25 @@ public class UserServiceImpl implements UserService {
         }else {
             return new JsonResult(1,"查询失败");
         }
+    }
+
+    @Override
+    public JsonResult ChangUserState(Integer uid) {
+        SysUser user = userDao.findById(uid).get();
+        if(user.getState()==true){
+            user.setState(false);
+        }else {
+            user.setState(true);
+        }
+        userDao.save(user);
+        return new JsonResult(0,"修改角色"+user.getUsername()+"状态成功！");
+    }
+
+    @Override
+    public JsonResult deleteUser(Integer uid) {
+        SysUser user = userDao.findById(uid).get();
+        //省略
+        userDao.delete(user);
+        return new JsonResult(0,"删除 用户："+user.getUsername()+" 成功！");
     }
 }

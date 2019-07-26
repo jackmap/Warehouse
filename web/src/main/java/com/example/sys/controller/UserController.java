@@ -44,4 +44,16 @@ public class UserController {
     public JsonResult editUser(SysUser user){
         return userService.editUser(user);
     }
+
+
+    @PostMapping("/delete/{uid}")
+    public JsonResult deleteUser(@PathVariable Integer uid){
+        return userService.deleteUser(uid);
+    }
+
+    @PostMapping("/ChangState/{uid}")
+    public JsonResult ChangState(@PathVariable Integer uid){
+        return userService.ChangUserState(uid);
+    }
+
 }
