@@ -81,4 +81,9 @@ public class RoleServiceImpl implements RoleService {
             return new JsonResult(1,"查询失败");
         }
     }
+
+    @Override
+    public JsonResult ChangRoleState(Integer rid) {
+        return null;
+    }
 }

@@ -31,22 +31,40 @@ public class PermissionServiceImpl implements PermissionService {
        }
     }
 
-    @Override
-    public JsonResult addPermission(SysPermission permission) {
-        SysPermission sysPermission=permissionDao.findByMenuname(permission.getMenuname());
-        if(sysPermission==null){
-            permission.setCreateTime(new Date());
-            permissionDao.save(permission);
-            return  new JsonResult(0,"保存权限成功！");
+    /**  检查父类权限的类型是否符合
+     * @param permission
+     * @return
+     */
+    private Boolean getPType(SysPermission permission) {
+        SysPermission sysp= permissionDao.findByParentName(permission.getParentName());
+        if(sysp.getResourceType().equals("menu")|| permission.getResourceType().equals("menu")){
+              return true;
+        }else if(sysp.getResourceType().equals("menu")|| permission.getResourceType().equals("button")){
+              return true;
         }else{
-            return  new JsonResult(1,"权限名称已存在，请更换权限名称！");
+             return false;
         }
     }
 
     @Override
+    public JsonResult addPermission(SysPermission permission) {
+        SysPermission sysPermission=permissionDao.findByMenuname(permission.getMenuname());
+        Boolean bool =  getPType(permission);
+        if(sysPermission==null||bool==true){
+            permission.setCreateTime(new Date());
+            permissionDao.save(permission);
+            return  new JsonResult(0,"保存权限成功！");
+        }else{
+            return  new JsonResult(1,"保存失败，请审核权限信息！");
+        }
+    }
+
+
+    @Override
     public JsonResult editPermission(SysPermission permission) {
         SysPermission sysPermission=permissionDao.findById(permission.getPid()).get();
-        if(sysPermission!=null){
+        Boolean bool =  getPType(permission);
+        if(sysPermission!=null || bool==true ){
             sysPermission.setMenuname(permission.getMenuname());
             sysPermission.setParentName(permission.getParentName());
             sysPermission.setIcon(permission.getIcon());
@@ -82,6 +100,12 @@ public class PermissionServiceImpl implements PermissionService {
         }else {
             return new JsonResult(1,"查询失败");
         }
+    }
+
+    @Override
+    public JsonResult findMenuRule() {
+        List<SysPermission> rules=permissionDao.findByResourceType("menu");
+        return new JsonResult(0,rules,"查询成功");
     }
 
 }

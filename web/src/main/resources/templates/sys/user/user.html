@@ -40,12 +40,29 @@
                             </form>
                         </div>
                         <div class="layui-card-header">
-                            <button class="layui-btn" onclick="xadmin.open('添加用户','/sys/user/add',600,500)"><i class="layui-icon"></i>添加</button>
+                            <button class="layui-btn" onclick="xadmin.open('添加用户','/sys/user/add',400,500)"><i class="layui-icon"></i>添加</button>
                         </div>
                         <div class="layui-card-body ">
-                            <table class="layui-hide" id="userTable"></table>
+                            <table class="layui-table" lay-data="{url:'/sys/user/findPage', page:true, id:'userTable'}" lay-filter="userTable">
+                                <thead>
+                                <tr>
+                                    <th lay-data="{type:'checkbox'}"></th>
+                                    <th lay-data="{field:'uid', width:80, sort: true, fixed: true}">用户ID</th>
+                                    <th lay-data="{field:'username', width:120}">用户名称</th>
+                                    <th lay-data="{field:'nickname'}">昵称</th>
+                                    <th lay-data="{field:'email'}">邮箱</th>
+                                    <th lay-data="{field:'phone'}">电话</th>
+                                    <th lay-data="{field:'address'}">地址</th>
+                                    <th lay-data="{field:'createTime'}">描述</th>
+                                    <th lay-data="{field:'state',width:120,toolbar: '#switchTpl'}">状态</th>
+                                    <th lay-data="{fixed: 'right', width:178, align:'center', toolbar: '#barDemo'}"></th>
+                                </tr>
+                                </thead>
+                            </table>
+                            <script type="text/html" id="switchTpl">
+                                <input type="checkbox" name="sex" value="{{d.id}}" lay-skin="switch" lay-text="开启|停用" lay-filter="sexDemo" {{ d.id == 10003  ? 'checked' : '' }}>
+                            </script>
                             <script type="text/html" id="barDemo">
-                                <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
                                 <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
                                 <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
                             </script>

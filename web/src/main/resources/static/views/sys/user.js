@@ -18,20 +18,6 @@
           elem: '#end' //指定元素
         });
 
-         table.render({
-            elem: '#userTable'
-            ,url:'/sys/user/findPage'
-            ,page: true
-            ,cols: [[
-               {field:'uid', title: 'ID', sort: true}
-              ,{field:'username', title: '用户名'}
-              ,{field:'nickname', title: '呢称'}
-              ,{field:'createTime', title: '创建时间'}
-              ,{field:'state', title: '状态'}
-              ,{fixed: 'right',align:'center',toolbar: '#barDemo'}
-            ]]
-          });
-
             /*用户-停用*/
             function member_stop(obj,id){
                 layer.confirm('确认要停用吗？',function(index){

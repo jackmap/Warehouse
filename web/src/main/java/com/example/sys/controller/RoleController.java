@@ -38,4 +38,9 @@ public class RoleController {
         return roleService.editRole(role);
     }
 
+
+    @PostMapping("/ChangState")
+    public JsonResult ChangState(Integer rid){
+        return roleService.ChangRoleState(rid);
+    }
 }

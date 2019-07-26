@@ -57,18 +57,29 @@
                         </div>
 
                         <div class="layui-card-header">
-                            <button class="layui-btn" onclick="xadmin.open('添加权限','./rule/add',600,500)"><i class="layui-icon"></i>添加</button>
+                            <button class="layui-btn" onclick="xadmin.open('添加权限','./rule/add',400,500)"><i class="layui-icon"></i>添加</button>
                         </div>
 
                         <div class="layui-card-body ">
-                            <table class="layui-hide" id="ruleTable"></table>
-                            <script type="text/html" id="switchTpl">
-                                <input type="checkbox" name="sex" value="{{d.id}}" lay-skin="switch" lay-text="女|男" lay-filter="sexDemo" {{ d.id == 10003 ? 'checked' : '' }}>
-                            </script>
+                            <table class="layui-table" lay-data="{url:'/sys/rule/findPage', page:true, id:'ruleTable'}" lay-filter="ruleTable">
+                                <thead>
+                                    <tr>
+                                        <th lay-data="{type:'checkbox', fixed: 'left'}"></th>
+                                        <th lay-data="{field:'pid', width:80, sort: true, fixed: true}">权限ID</th>
+                                        <th lay-data="{field:'menuname', width:120}">权限名称</th>
+                                        <th lay-data="{field:'url'}">路径</th>
+                                        <th lay-data="{field:'resourceType', width:80}">类型</th>
+                                        <th lay-data="{field:'note'}">备注</th>
+                                        <th lay-data="{fixed: 'right', width:178, align:'center', toolbar: '#barDemo'}"></th>
+                                    </tr>
+                                </thead>
+                            </table>
                             <script type="text/html" id="barDemo">
-                                <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
                                 <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
                                 <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+                            </script>
+                            <script type="text/html" id="swDemo">
+                                 <input type="checkbox" name="switch"  lay-text="开启|停用"  checked="" lay-skin="switch">
                             </script>
                         </div>
                     </div>

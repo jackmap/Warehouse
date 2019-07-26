@@ -32,5 +32,9 @@ public interface RoleService {
      * @return
      */
     JsonResult findPageFilter(RequestFilter requestFilter);
-
+    /**  改变角色状态
+     * @param rid
+     * @return
+     */
+    JsonResult ChangRoleState(Integer rid);
 }

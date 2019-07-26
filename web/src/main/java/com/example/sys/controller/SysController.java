@@ -1,16 +1,24 @@
 package com.example.sys.controller;
 
 import com.example.sys.common.JsonResult;
+import com.example.sys.dao.PermissionDao;
+import com.example.sys.entity.SysPermission;
+import com.example.sys.service.PermissionService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.security.acl.Permission;
+import java.util.Optional;
 
 /**
  * 系统页面控制器
@@ -107,7 +115,6 @@ public class SysController {
         return "/sys/user/edit";
     }
 
-
     /** 权限页面
      * @return
      */
@@ -121,7 +128,7 @@ public class SysController {
         return "/sys/rule/add";
     }
 
-    @RequestMapping("/sys/rule/edit")
+    @GetMapping("/sys/rule/edit")
     public  String EditRule(){
         return "/sys/rule/edit";
     }
@@ -152,4 +159,5 @@ public class SysController {
     public  String Cate(){
         return "/sys/rule/cate";
     }
+
 }

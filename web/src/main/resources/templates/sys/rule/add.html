@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/css/xadmin.css">
     <script src="/lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="/js/xadmin.js"></script>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
 </head>
 <body>
 <div class="layui-fluid">
@@ -21,7 +22,14 @@
         <div class="layui-form-item">
             <label class="layui-form-label"><span class="x-red">*</span>父类权限</label>
             <div class="layui-input-inline">
-                <input type="text" name="parentName" required  lay-verify="required" placeholder="请输入父类权限" autocomplete="off" class="layui-input">
+            <input id="pn"  type="text" name="parentName" required  lay-verify="required" placeholder="请输入父类权限" autocomplete="off" class="layui-input">
+            </div>
+
+        </div>
+        <div class="layui-tree-div " style="display:none;">
+            <label class="layui-form-label"><span class="x-red"></span>&nbsp;</label>
+            <div class="layui-input-inline" >
+                <div id="ruletree" class="demo-tree demo-tree-box" style="width: 200px;background-color:#376b7969;" ></div>
             </div>
         </div>
         <div class="layui-form-item">
@@ -34,7 +42,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">icon</label>
             <div class="layui-input-inline">
-                <input type="text" name="icon" required  lay-verify="required" placeholder="请输入图片地址" autocomplete="off" class="layui-input">
+                <input  type="text" name="icon" required  lay-verify="required" placeholder="请输入图片地址" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
@@ -61,9 +69,32 @@
     </form>
     </div>
 </div>
+
     <script>
-    layui.use('form', function(){
+    layui.use(['form','tree'], function(){
       var form = layui.form;
+      var tree = layui.tree
+
+        //模拟数据1
+        ,data1 = [{
+          title: '公司名称' ,id: 1
+          ,children: [{
+              title: '客户管理'
+              ,id: 1001
+              },{
+              title: '系统设置'
+              ,id: 1002
+          }]
+        }];
+
+      //开启节点操作图标
+		tree.render({
+			elem: '#ruletree'
+			,data: data1
+			,click: function(obj){
+			   $("#pn").val(obj.data.title);
+			}
+	    });
 
       //监听提交
       form.on('submit(add)', function(data) {
@@ -87,6 +118,9 @@
           layer.msg(JSON.stringify(data.field));
           return false;
       });
+    });
+    $("#pn").focus(function(){
+         $(".layui-tree-div").show();
     });
     </script>
 </body>

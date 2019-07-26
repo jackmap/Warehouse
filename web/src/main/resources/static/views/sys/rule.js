@@ -18,18 +18,20 @@
           elem: '#end' //指定元素
         });
 
-         table.render({
-            elem: '#ruleTable'
-            ,url:'/sys/rule/findPage'
-            ,page: true
-            ,cols: [[
-               {field:'pid', title: 'ID', sort: true}
-              ,{field:'menuname', title: '权限名称'}
-              ,{field:'url', title: '权限'}
-              ,{field:'resourceType', title: '权限类型'}
-              ,{fixed: 'right',align:'center',toolbar: '#barDemo'}
-            ]]
+          //监听工具条
+          table.on('tool(ruleTable)', function(obj){
+            var data = obj.data;
+            if(obj.event === 'del'){
+              layer.confirm('真的删除行么', function(index){
+                obj.del();
+                layer.close(index);
+              });
+            } else if(obj.event === 'edit'){
+               xadmin.open('添加权限','./rule/edit/',400,450)
+//              layer.alert('编辑行：<br>'+ JSON.stringify(data))
+            }
           });
+
 
             /*用户-停用*/
             function member_stop(obj,id){
@@ -54,4 +56,8 @@
 
                 });
             }
+
+            $("#pn").focus(function(){
+              $("#test9").css("background-color","#FFFFCC");
+            });
 });

@@ -33,4 +33,9 @@ public interface PermissionService {
      * @return
      */
     JsonResult findRulePageFilter(RequestFilter requestFilter);
+
+    /**查询所有的菜单
+     * @return
+     */
+    JsonResult findMenuRule();
 }

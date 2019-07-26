@@ -24,6 +24,11 @@ public class RuleController {
         return permissionService.findRulePage(page,limit);
     }
 
+    @GetMapping("/findMenu")
+    public JsonResult findMenu(){
+        return permissionService.findMenuRule();
+    }
+
     @PostMapping("/findPageFilter")
     public JsonResult findPageFilter(@RequestBody RequestFilter requestFilter){
         return permissionService.findRulePageFilter(requestFilter);
