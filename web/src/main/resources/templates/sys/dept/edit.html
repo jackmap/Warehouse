@@ -11,15 +11,15 @@
 <body>
     <form class="layui-form" action="" method="post">
         <div class="layui-form-item">
-            <label class="layui-form-label"><span class="x-red">*</span>角色名</label>
+            <label class="layui-form-label"><span class="x-red">*</span>部门名称</label>
             <div class="layui-input-inline">
-                <input type="text" name="roleName" required  lay-verify="required" placeholder="请输入角色名" autocomplete="off" class="layui-input">
+                <input type="text" name="roleName" required  lay-verify="required" placeholder="请输入部门名称" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label"><span class="x-red">*</span>描述</label>
+            <label class="layui-form-label"><span class="x-red">*</span>部门职责</label>
             <div class="layui-input-inline">
-                <input type="text" name="description" required  lay-verify="required" placeholder="请输入角色描述" autocomplete="off" class="layui-input">
+                <input type="text" name="description" required  lay-verify="required" placeholder="请输入部门职责" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item layui-form-text">
@@ -41,17 +41,29 @@
     layui.use('form', function(){
       var form = layui.form;
 
+
+      //表单初始赋值
+      form.val('formDemo', {
+        "rolename": "贤心"
+        ,"description": "123456"
+        ,"note": "我爱 layui"
+      })
+
       //监听提交
       form.on('submit(formDemo)', function(data){
-        $.post("/sys/role/add/",function(result){
-                layer.close();
-                 xadmin.close();
-                if(result.code==0){
+           $.ajax({
+                url: "/sys/dept/editDept",
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(data.field),
+                success: function(result) {
+                   if(result.code==0){
                       alert(result.message)
-                }else{
+                   }else{
                        alert(result.message)
+                   }
                 }
-        });
+           });
         layer.msg(JSON.stringify(data.field));
         return false;
       });

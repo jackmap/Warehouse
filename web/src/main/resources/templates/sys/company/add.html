@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>仓库管理系统</title>
+    <link rel="stylesheet" href="/css/font.css">
+    <link rel="stylesheet" href="/css/xadmin.css">
+    <script src="/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/js/xadmin.js"></script>
+</head>
+<body>
+    <form class="layui-form" action="" method="post">
+        <div class="layui-form-item">
+            <label class="layui-form-label"><span class="x-red">*</span>公司名称</label>
+            <div class="layui-input-inline">
+                <input type="text" name="companyName" required  lay-verify="required" placeholder="请输入公司名称" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"><span class="x-red">*</span>公司类型</label>
+            <div class="layui-input-inline">
+                <select name="companyType">
+                    <option value="创业型公司">创业型公司</option>
+                    <option value="上市型公司">上市型公司</option>
+                    <option value="集团公司">集团公司</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"><span class="x-red">*</span>公司联系人</label>
+            <div class="layui-input-inline">
+                <input type="text" name="companyAdmin" required  lay-verify="required" placeholder="请输入公司联系人" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"><span class="x-red">*</span>公司电话</label>
+            <div class="layui-input-inline">
+                <input type="text" name="companyPhone" required  lay-verify="required" placeholder="请输入公司电话" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"><span class="x-red">*</span>公司地址</label>
+            <div class="layui-input-inline">
+                <input type="text" name="companyAddress" required  lay-verify="required" placeholder="请输入公司地址" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">备注</label>
+            <div class="layui-input-inline">
+                <textarea name="note" placeholder="请输入内容" class="layui-textarea"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+
+    <script>
+    //Demo
+    layui.use('form', function(){
+      var form = layui.form;
+
+      //监听提交
+      form.on('submit(formDemo)', function(data){
+        $.ajax({
+                url: "/sys/company/addCompany",
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(data.field),
+                success: function(result) {
+                   if(result.code==0){
+                      alert(result.message)
+                   }else{
+                       alert(result.message)
+                   }
+                }
+           });
+        layer.msg(JSON.stringify(data.field));
+        return false;
+      });
+    });
+    </script>
+</body>
+</html>

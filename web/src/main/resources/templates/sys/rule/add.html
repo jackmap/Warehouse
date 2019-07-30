@@ -73,10 +73,14 @@
     <script>
     layui.use(['form','tree'], function(){
       var form = layui.form;
-      var tree = layui.tree
+      var tree = layui.tree;
 
+      var  data2="";
+      $.post("/sys/rule/findMenu/",function(result){
+               data2=result.data;
+       });
         //模拟数据1
-        ,data1 = [{
+         var  data1 = [{
           title: '公司名称' ,id: 1
           ,children: [{
               title: '客户管理'
@@ -90,7 +94,7 @@
       //开启节点操作图标
 		tree.render({
 			elem: '#ruletree'
-			,data: data1
+			,data: data2
 			,click: function(obj){
 			   $("#pn").val(obj.data.title);
 			}
