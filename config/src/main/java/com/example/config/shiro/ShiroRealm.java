@@ -1,18 +1,17 @@
 package com.example.config.shiro;
 
-import com.example.sys.service.UserService;
+import com.example.controller.sys.service.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
-import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.example.sys.entity.SysUser;
+import com.example.controller.sys.entity.SysUser;
 
 
 /**
@@ -25,6 +24,7 @@ public class ShiroRealm extends AuthorizingRealm {
 	// 一般这里都写的是servic，我省略了service的接口和实现方法直接调用的dao
 	@Autowired
 	private UserService userService;
+
 	/*
 	@Autowired
 	private TbPermissionsDao tbPermissionsDao;

@@ -8,6 +8,45 @@
 <body>
 <menu  th:fragment="menu">
     <ul id="nav">
+        <!--仓库设置-->
+        <li>
+            <a href="javascript:;">
+                <i class="iconfont left-nav-li" lay-tips="仓库设置">&#xe723;</i>
+                <cite>仓库设置</cite>
+                <i class="iconfont nav_right">&#xe697;</i></a>
+            <ul class="sub-menu">
+                <li>
+                    <a onclick="xadmin.add_tab('仓库列表','/houser/s')">
+                        <i class="iconfont">&#xe6a7;</i>
+                        <cite>仓库列表</cite></a>
+                </li>
+                <li>
+                    <a onclick="xadmin.add_tab('仓库列表','/houser/s')">
+                        <i class="iconfont">&#xe6a7;</i>
+                        <cite>仓库列表1</cite></a>
+                </li>
+            </ul>
+        </li>
+        <!--订单设置-->
+        <li>
+            <a href="javascript:;">
+                <i class="iconfont left-nav-li" lay-tips="订单管理">&#xe723;</i>
+                <cite>订单管理</cite>
+                <i class="iconfont nav_right">&#xe697;</i></a>
+            <ul class="sub-menu">
+                <li>
+                    <a onclick="xadmin.add_tab('订单列表','/order/list')">
+                        <i class="iconfont">&#xe6a7;</i>
+                        <cite>订单列表</cite></a>
+                </li>
+                <li>
+                    <a onclick="xadmin.add_tab('订单列表1','/order/list')">
+                        <i class="iconfont">&#xe6a7;</i>
+                        <cite>订单列表1</cite></a>
+                </li>
+            </ul>
+        </li>
+       <!--系统设置-->
         <li>
             <a href="javascript:;">
                 <i class="iconfont left-nav-li" lay-tips="管理员管理">&#xe726;</i>
@@ -18,11 +57,6 @@
                     <a onclick="xadmin.add_tab('管理员列表','/sys/user')">
                         <i class="iconfont">&#xe6a7;</i>
                         <cite>管理员列表</cite></a>
-                </li>
-                <li>
-                    <a onclick="xadmin.add_tab('角色管理','/sys/role')">
-                        <i class="iconfont">&#xe6a7;</i>
-                        <cite>角色管理</cite></a>
                 </li>
                 <li>
                     <a onclick="xadmin.add_tab('权限管理','/sys/rule')">

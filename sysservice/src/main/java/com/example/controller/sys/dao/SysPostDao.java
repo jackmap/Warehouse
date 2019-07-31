@@ -11,4 +11,6 @@ public interface SysPostDao extends JpaRepository<SysPost,Integer> {
     SysPost findByPostName(String postName);
 
     List<SysDept> findAllByCompanyName(String companyName);
+
+    List<SysPost> findByDeptName(String deptName);
 }

@@ -41,4 +41,9 @@ public class CompanyController {
         return companyService.deleteCompany(companyid);
     }
 
+    @PostMapping("/ChangState/{companyid}")
+    public JsonResult ChangState(@PathVariable Integer companyid){
+        return companyService.ChangCompanyState(companyid);
+    }
+
 }

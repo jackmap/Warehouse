@@ -11,6 +11,7 @@
     <modules>
         <module>web</module>
         <module>sysservice</module>
+        <module>stock</module>
         <module>config</module>
     </modules>
 

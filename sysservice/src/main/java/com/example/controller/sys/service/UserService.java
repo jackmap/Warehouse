@@ -3,12 +3,16 @@ package com.example.controller.sys.service;
 import com.example.controller.sys.common.JsonResult;
 import com.example.controller.sys.common.RequestFilter;
 import com.example.controller.sys.entity.SysUser;
+import org.springframework.data.domain.Page;
+
+import java.text.ParseException;
+import java.util.List;
 
 public interface UserService {
     /**查询所有的用户
      * @return
      */
-    JsonResult findAll();
+    List<SysUser> findAll();
 
     /**
      * 添加加用户
@@ -28,14 +32,7 @@ public interface UserService {
      * @param limit
      * @return
      */
-    JsonResult findUserPage(int page, int limit);
-
-    /**  根据过滤条件查询所有的用户信息
-     * @param requestFilter
-     * @return
-     */
-    JsonResult findUserPage(RequestFilter requestFilter);
-
+    List<SysUser> findUserPage(String start ,String end,String username,int page, int limit) throws ParseException;
 
     SysUser findUserByName(String username);
 

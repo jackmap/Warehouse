@@ -15,13 +15,10 @@ public class SysRole implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id@GeneratedValue
     private Integer rid; // 编号
-
     private String roleName; // 角色标识程序中判断使用,如"admin",这个是唯一的:
-
+    private String roleNameEn;
     private String description; // 角色描述,UI界面显示使用
-
     private Boolean available = Boolean.FALSE; // 是否可用,如果不可用将不会添加给用户
-
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @CreatedDate
     private Date createTime;
@@ -42,12 +39,21 @@ public class SysRole implements Serializable {
         this.rid = rid;
     }
 
+
     public String getRoleName() {
         return roleName;
     }
 
     public void setRoleName(String roleName) {
         this.roleName = roleName;
+    }
+
+    public String getRoleNameEn() {
+        return roleNameEn;
+    }
+
+    public void setRoleNameEn(String roleNameEn) {
+        this.roleNameEn = roleNameEn;
     }
 
     public String getDescription() {

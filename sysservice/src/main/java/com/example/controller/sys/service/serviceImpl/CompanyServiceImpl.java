@@ -4,9 +4,11 @@ import com.example.controller.sys.common.JsonResult;
 import com.example.controller.sys.dao.CompanyDao;
 import com.example.controller.sys.dao.SysDeptDao;
 import com.example.controller.sys.dao.SysPostDao;
+import com.example.controller.sys.dao.UserDao;
 import com.example.controller.sys.entity.Company;
 import com.example.controller.sys.entity.SysDept;
 import com.example.controller.sys.entity.SysPost;
+import com.example.controller.sys.entity.SysUser;
 import com.example.controller.sys.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -31,6 +33,9 @@ public class CompanyServiceImpl implements CompanyService {
     SysDeptDao sysDeptDao;
     @Autowired
     SysPostDao sysPostDao;
+
+    @Autowired
+    UserDao userDao;
 
     SimpleDateFormat sdf=new SimpleDateFormat("YYYY-HH-DD  HH:mm:ss");
 
@@ -67,7 +72,7 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public JsonResult addCompany(Company company) {
         Company company1=companyDao.findByCompanyName(company.getCompanyName());
-        if(StringUtils.isEmpty(company1)){
+        if(StringUtils.isEmpty(company1)|| !StringUtils.isEmpty(company.getCompanyName())){
             company.setCreateTime(new Date());
             companyDao.save(company);
             return  new JsonResult(0,"公司信息保存成功！");
@@ -134,17 +139,42 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public JsonResult deleteCompany(Integer companyid) {
-        return null;
+        Company company=companyDao.findById(companyid).get();
+        if(!StringUtils.isEmpty(company)){
+            List<SysUser>  list= userDao.findByCompanyName(company.getCompanyName());
+            if(list.size()>0){
+                return new JsonResult(1,"删除失败，该公司被占用！");
+            }
+            companyDao.delete(company);
+            return new JsonResult(0,"删除成功！");
+        }else {
+            return new JsonResult(1,"删除失败，请查询公司是否存在！");
+        }
     }
 
     @Override
     public JsonResult deleteSysDept(Integer deptid) {
-        return null;
+        SysDept dept=sysDeptDao.findById(deptid).get();
+        if(!StringUtils.isEmpty(dept)){
+            List<SysPost>  list= sysPostDao.findByDeptName(dept.getDeptName());
+            if(list.size()>0){
+                return new JsonResult(1,"删除失败，该部门被占用！");
+            }
+            sysDeptDao.delete(dept);
+            return new JsonResult(0,"删除成功！");
+        }else {
+            return new JsonResult(1,"删除失败，请查询该部门是否存在！");
+        }
     }
 
     @Override
     public JsonResult deleteSysPost(Integer postid) {
-        return null;
+        SysPost post=sysPostDao.findById(postid).get();
+        if(!StringUtils.isEmpty(post)){
+            sysPostDao.delete(post);
+            return new JsonResult(0,"删除成功！");
+        }
+        return new JsonResult(1,"删除失败，请查询该岗位是否存在！");
     }
 
 
@@ -224,7 +254,21 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public JsonResult ChangCompanyState(Integer uid) {
-        return null;
+    public JsonResult ChangCompanyState(Integer companyid) {
+        Company company = companyDao.findById(companyid).get();
+        if(company.getAvailable()==true){
+            List<SysUser> list=userDao.findByCompanyName(company.getCompanyName());
+            for (SysUser user:list) {
+                user.setState(false);
+            }
+            userDao.saveAll(list);
+            company.setAvailable(false);
+            companyDao.save(company);
+            return new JsonResult(0,"暂停 "+company.getCompanyName()+" 下所有的用户状态成功！");
+        }else {
+            company.setAvailable(true);
+            companyDao.save(company);
+            return new JsonResult(0,"启用"+company.getCompanyName()+"下所有的用户状态成功！");
+        }
     }
 }

@@ -2,10 +2,8 @@ package com.example.controller.sys;
 
 import com.example.controller.sys.common.JsonResult;
 import com.example.controller.sys.dao.PermissionDao;
-import com.example.controller.sys.dao.RoleDao;
 import com.example.controller.sys.dao.UserDao;
 import com.example.controller.sys.entity.SysPermission;
-import com.example.controller.sys.entity.SysRole;
 import com.example.controller.sys.entity.SysUser;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -144,28 +142,6 @@ public class SysController {
         return "/sys/rule/edit";
     }
 
-    @Autowired
-    RoleDao roleDao;
-    /**角色页面
-     * @return
-     */
-    @RequestMapping("/sys/role")
-    public  String Role(){
-        return "/sys/role/role";
-    }
-
-    @RequestMapping("/sys/role/add")
-    public  String AddRole(){
-        return "/sys/role/add";
-    }
-
-    @RequestMapping("/sys/role/edit/{rid}")
-    public  String EditRole(Model model, @PathVariable Integer rid){
-        SysRole role=roleDao.findById(rid).get();
-        model.addAttribute("role",role);
-        return "/sys/role/edit";
-    }
-
     /**公司管理页面
      * @return
      */
@@ -217,7 +193,7 @@ public class SysController {
     }
 
 
-    /**角色权限页面
+    /**岗位权限页面
      * @return
      */
     @RequestMapping("/sys/cate")

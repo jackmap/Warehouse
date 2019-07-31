@@ -1,4 +1,4 @@
-package com.example.sys;
+package com.example.controller.sys;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

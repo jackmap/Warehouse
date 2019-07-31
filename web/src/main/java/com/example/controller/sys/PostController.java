@@ -47,4 +47,14 @@ public class PostController {
     public JsonResult deletePostByPostId(@PathVariable Integer postid){
         return companyService.deleteSysPost(postid);
     }
+
+
+    /** 岗位权限
+     * @return
+     */
+    @PostMapping("/postRule")
+    public JsonResult PostRule(){
+
+        return null;
+    }
 }

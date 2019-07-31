@@ -12,9 +12,8 @@
         <div class="x-nav">
           <span class="layui-breadcrumb">
             <a href="">首页</a>
-            <a href="">演示</a>
-            <a>
-              <cite>导航元素</cite></a>
+            <a href="">系统设置</a>
+            <a><cite>管理员列表</cite></a>
           </span>
           <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" onclick="location.reload()" title="刷新">
             <i class="layui-icon layui-icon-refresh" style="line-height:30px"></i></a>
@@ -98,18 +97,18 @@
                         });
                      });
                      //监听工具条
-                      table.on('tool(roleTable)', function(obj){
+                      table.on('tool(userTable)', function(obj){
                         var data = obj.data;
                         if(obj.event === 'del'){
                           layer.confirm('真的删除行么', function(index){
                             obj.del();
-                            $.post("/sys/role/delete/"+data.uid,function(result){
+                            $.post("/sys/user/delete/"+data.uid,function(result){
                                    alert(result.message);
                                });
                             layer.close(index);
                           });
                         } else if(obj.event === 'edit'){
-                           xadmin.open('添加权限','./rule/edit/',400,450)
+                           xadmin.open('修改用户信息','/sys/user/editUser/',400,450)
             //              layer.alert('编辑行：<br>'+ JSON.stringify(data))
                         }
                       });
